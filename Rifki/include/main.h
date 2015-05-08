@@ -4,7 +4,8 @@
 #include <map>
 
 #include "card.h"
-#include "player.h"
+#include "../src/player.cpp"
+#include "../src/toolkit.cpp"
 
 
 #endif // MAIN_H_INCLUDED

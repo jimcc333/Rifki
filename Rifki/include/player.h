@@ -1,6 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "toolkit.h"
+
 using namespace std;
 
 /**
@@ -18,9 +20,7 @@ class player {
             cards  = player_cards;
         }
 
-        show_hand (){
-            cout << "fine" << endl;
-        }
+        void show_hand();
 
 
     protected:
