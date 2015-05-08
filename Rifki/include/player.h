@@ -21,6 +21,7 @@ class player {
         }
 
         void show_hand();
+        void receive_card(int id){cards[id] = true;}
 
 
     protected:

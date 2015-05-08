@@ -5,6 +5,7 @@ using namespace std;
 
 int main()
 {
+    cout << "     --Welcome to King!-- " << endl;
 
     //create game deck
     map<int,bool> cards;
@@ -14,10 +15,15 @@ int main()
         cards[(i/13+1)*100 + (i+1)-(13*(i/13))] = false;
     }
 
-    cout << "before" << endl;
-    player player1(1,3, cards);
-    player1.show_hand();
-    cout << "after " << player1.id << endl;
+    player player1(1,1,cards);
+    player player2(2,2,cards);
+    player player3(3,3,cards);
+    player player4(4,4,cards);
 
+
+    cout << endl << "     --Game over--" << endl;
     return 0;
 }
+
+
+
