@@ -200,7 +200,43 @@ void return_suit(vector<int> cards, int suit_id, vector<int> &scards){
     }
 }
 
-/// estimates the number of hearts the hand would receive
+
+/// estimates the points the hand would receive from king contract
+int est_king(vector<int> cards){
+    int ct = 320/4; //default is base rate
+    bool have_king = false;
+
+    sort(cards.begin(), cards.end());
+
+    //check to see if king is held
+    for(vector<int>::iterator it = cards.begin(); it != cards.end(); ++it){
+        if(*it == 214){have_king = true;}
+    }
+
+    if(have_king){
+        if(count_suit(cards, 1) == 0 || count_suit(cards, 3) == 0 || count_suit(cards, 4) == 0){
+            // holding the king and have an empty suit in hand
+            ct = 0;
+        }
+        if(count_suit(cards, 1) == 1 || count_suit(cards, 3) == 1 || count_suit(cards, 4) == 1){
+            // holding the king and have a single card suit in hand
+            ct = 16;
+        }
+        if(count_suit(cards, 1) == 2 || count_suit(cards, 3) == 2 || count_suit(cards, 4) == 2){
+            // holding the king and have a two card suit in hand
+            ct = 40;
+        }
+    } else {
+        // dont have the king
+
+
+    }
+
+    return ct;
+}
+
+
+/// estimates the points the hand would receive from no hearts contract
 int est_hearts(vector<int> cards){
     int ct = 0;
     int suit;
@@ -237,7 +273,25 @@ int est_hearts(vector<int> cards){
             break;
     }
 
+    // check if there is chance to get rid of an unwanted high heart
+    return_suit(cards, 1, scards);
+    if(scards.size() == 3 && ct >= 4){ct -= 1}
+    if(scards.size() == 2 && ct >= 4){ct -= 2}
+    if(scards.size() == 1 && ct >= 4){ct -= 3}
+    if(scards.size() == 0 && ct >= 4){ct -= 4}
 
-    return ct;
+    return_suit(cards, 3, scards);
+    if(scards.size() == 3 && ct >= 4){ct -= 1}
+    if(scards.size() == 2 && ct >= 4){ct -= 2}
+    if(scards.size() == 1 && ct >= 4){ct -= 3}
+    if(scards.size() == 0 && ct >= 4){ct -= 4}
+
+    return_suit(cards, 4, scards);
+    if(scards.size() == 3 && ct >= 4){ct -= 1}
+    if(scards.size() == 2 && ct >= 4){ct -= 2}
+    if(scards.size() == 1 && ct >= 4){ct -= 3}
+    if(scards.size() == 0 && ct >= 4){ct -= 4}
+
+    return ct*30;
 }
 

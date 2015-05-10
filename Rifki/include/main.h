@@ -10,7 +10,7 @@
 #include "../src/score.cpp"
 
 /**
-Contracts:
+Contract_id's:
 
     0: +50x13 for every round: trump
     1: -320 for 213: king/rifki
@@ -20,13 +20,13 @@ Contracts:
     5: -180x2 for last two rounds: no last two
     6: -50x13 for every round: no tricks
 
-Suits:
+Suit_id's:
     1: Spades
     2: Hearts
     3: Diamonds
     4: Clubs
 
-Cards:
+Number_id's:
     2: 2
     ...
     10: 10

@@ -43,10 +43,13 @@ int player::call_contract(int contracts[7]){
 
     est_hearts(cards);
 
-    sort(cards.begin(), cards.end());
-    hand_output();
+    est_king(cards);
 
-    cout << " hearts est: " << est_hearts(cards) << endl;
+
+    sort(cards.begin(), cards.end());
+    hand_output(cards);
+
+    cout << " king est: " << est_king(cards) << endl;
 
 
 
