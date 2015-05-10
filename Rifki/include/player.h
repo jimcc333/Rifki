@@ -19,8 +19,11 @@ class player {
             location = player_location;
         }
 
+        void tell_hand();
         void show_hand();
-        void receive_hand(vector<int> hand){cards = hand;}
+        void receive_cards(vector<int> hand){cards.insert(cards.end(), hand.begin(), hand.end());}
+        void empty_hand(){cards.clear();}
+        int call_contract(int contracts[7]);
 
 
     protected:

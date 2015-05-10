@@ -5,7 +5,6 @@
 #include <vector>
 #include <algorithm>    // std::random_shuffle
 
-#include "card.h"
 #include "../src/player.cpp"
 #include "../src/toolkit.cpp"
 #include "../src/score.cpp"
