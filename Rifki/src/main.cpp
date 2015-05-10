@@ -15,10 +15,12 @@ int main()
         cards[(i/13+1)*100 + (i+1)-(13*(i/13))] = false;
     }
 
-    player player1(1,1,cards);
-    player player2(2,2,cards);
-    player player3(3,3,cards);
-    player player4(4,4,cards);
+    player player1(0,0,cards);
+    player player2(1,1,cards);
+    player player3(2,2,cards);
+    player player4(3,3,cards);
+
+    score points;
 
 
     cout << endl << "     --Game over--" << endl;
