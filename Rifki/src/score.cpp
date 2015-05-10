@@ -47,4 +47,3 @@ bool score::add(int player_id, int round, int contract_id, int added_score){
     }
 }
 
-

@@ -2,6 +2,8 @@
 #define MAIN_H_INCLUDED
 
 #include <map>
+#include <vector>
+#include <algorithm>    // std::random_shuffle
 
 #include "card.h"
 #include "../src/player.cpp"
@@ -21,5 +23,6 @@ Contracts:
 
 **/
 
+bool new_game();
 
 #endif // MAIN_H_INCLUDED

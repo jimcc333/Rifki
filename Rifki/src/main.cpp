@@ -5,27 +5,50 @@ using namespace std;
 
 int main()
 {
-    cout << "     --Welcome to King!-- " << endl;
+    cout << "     --Welcome to Rifki!-- " << endl;
+    cout << " -Starting new game- " << endl;
 
-    //create game deck
-    map<int,bool> cards;
-    for(int i = 0; i < 52; i++){
-        //declares the id of every available card in the game
-        //  and assigns false to ownership
-        cards[(i/13+1)*100 + (i+1)-(13*(i/13))] = false;
+    if(new_game()){
+        cout << " -Game over- " << endl;
+    } else {
+        cout << " Game failed!" << endl;
+        return 0;
     }
 
-    player player1(0,0,cards);
-    player player2(1,1,cards);
-    player player3(2,2,cards);
-    player player4(3,3,cards);
 
-    score points;
-
-
-    cout << endl << "     --Game over--" << endl;
+    cout << "     --Rifki Exiting--" << endl;
     return 0;
 }
 
+bool new_game(){
+    //create game deck
+    vector<int> deck;
+    for(int i = 0; i < 52; i++){
+        deck.push_back((i/13+1)*100 + (i+1)-(13*(i/13)));
+    }
 
+    player player0(0,0); //player zero always first dealer
+    player player1(1,1);
+    player player2(2,2);
+    player player3(3,3);
+
+    score points;
+
+    //shuffle the deck
+    random_shuffle(deck.begin(), deck.end());
+
+    //start playing round by round
+    for(int round = 0; round < 20; round++){
+        cout << "Round " << round+1 << " begins." << endl;
+
+        //shuffle the deck
+        random_shuffle(deck.begin(), deck.end());
+
+        //deal cards
+
+        cout << "End of round." << endl << endl;
+    }
+
+    return true;
+}
 

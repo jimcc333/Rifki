@@ -14,19 +14,18 @@ class player {
         int id;
         int location;
 
-        player (int player_id, int player_location, map<int,bool> player_cards){
+        player (int player_id, int player_location){
             id = player_id;
             location = player_location;
-            cards  = player_cards;
         }
 
         void show_hand();
-        void receive_card(int id){cards[id] = true;}
+        void receive_hand(vector<int> hand){cards = hand;}
 
 
     protected:
     private:
-        map<int,bool> cards;
+        vector<int> cards;
 };
 
 #endif // CARD_H
