@@ -8,13 +8,13 @@ void card_reader(int id){
     int suit = id/100;
     int number = id%100;
 
-    if(number <= 0 || number > 13){
+    if(number <= 1 || number > 14){
         cout << "  Card number error!" << endl;
         return;
     }
 
     switch(number){
-        case 1 :
+        case 14 :
             cout << "Ace of ";
             break;
         case 11 :
@@ -59,16 +59,13 @@ void card_output(int id){
     int suit = id/100;
     int number = id%100;
 
-    if(number <= 0 || number > 13){
+    if(number <= 1 || number > 14){
         cout << "  Card number error!" << endl;
         return;
     }
 
     for(int i = 0; i < number; i++){
         cout << " ";
-    }
-    if(number == 1){
-        cout << "             ";
     }
 
     switch(suit){
@@ -90,7 +87,7 @@ void card_output(int id){
     }
 
     switch(number){
-        case 1 :
+        case 14 :
             cout << "A";
             break;
         case 11 :
@@ -112,6 +109,11 @@ void card_output(int id){
 
 }
 
+void hand_output(vector<int> cards){
+    for(vector<int>::iterator it = cards.begin(); it != cards.end(); ++it){
+        card_output(*it);
+    }
+}
 
 /// estimates the value of the hand for trump game
 int takepoint_eval(vector<int> cards){
@@ -185,6 +187,57 @@ int count_suit(vector<int> cards, int suit_id){
     for(int i = 0; i < cards.size(); i++){
         if(cards[i]/100 == suit_id){ct++;}
     }
+    return ct;
+}
+
+/// returns a vector of the cards of the given suit
+void return_suit(vector<int> cards, int suit_id, vector<int> &scards){
+    scards.clear();
+    for(vector<int>::iterator it = cards.begin(); it != cards.end(); ++it){
+        if(*it/100 == suit_id){
+            scards.push_back(*it);
+        }
+    }
+}
+
+/// estimates the number of hearts the hand would receive
+int est_hearts(vector<int> cards){
+    int ct = 0;
+    int suit;
+
+    sort(cards.begin(), cards.end());
+
+    vector<int> scards;
+
+    return_suit(cards, 2, scards);
+
+    switch(scards.size()){
+        case 0:
+            break;
+        case 1:
+            if(scards[0]%100 > 4){ct += 4;}
+            break;
+        case 2:
+            if(scards[0]%100 > 4){ct += 4;}
+            if(scards[1]%100 > 8){ct += 4;}
+            break;
+        case 3:
+            if(scards[0]%100 > 4){ct += 4;}
+            if(scards[1]%100 > 8){ct += 4;}
+            if(scards[2]%100 > 11){ct += 3;}
+            break;
+        case 4:
+            if(scards[0]%100 > 4){ct += 4;}
+            if(scards[1]%100 > 8){ct += 4;}
+            if(scards[2]%100 > 12){ct += 3;}
+            break;
+        default:
+            if(scards[0]%100 > 4){ct += 4;}
+            if(scards[1]%100 > 8){ct += 4;}
+            break;
+    }
+
+
     return ct;
 }
 

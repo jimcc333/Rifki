@@ -20,6 +20,21 @@ Contracts:
     5: -180x2 for last two rounds: no last two
     6: -50x13 for every round: no tricks
 
+Suits:
+    1: Spades
+    2: Hearts
+    3: Diamonds
+    4: Clubs
+
+Cards:
+    2: 2
+    ...
+    10: 10
+    11: Jack
+    12: Queen
+    13: King
+    14: Ace
+
 **/
 
 bool new_game();

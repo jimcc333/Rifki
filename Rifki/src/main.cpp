@@ -24,7 +24,7 @@ bool new_game(){
     //create game deck
     vector<int> deck;
     for(int i = 0; i < 52; i++){
-        deck.push_back((i/13+1)*100 + (i+1)-(13*(i/13)));
+        deck.push_back((i/13+1)*100 + (i+2)-(13*(i/13)));
     }
 
     player player0(0,0); //player zero always first dealer
@@ -33,9 +33,6 @@ bool new_game(){
     player player3(3,3);
 
     score points;
-
-    //shuffle the deck
-    //random_shuffle(deck.begin(), deck.end());
 
     //start playing round by round
     for(int round = 0; round < 20; round++){

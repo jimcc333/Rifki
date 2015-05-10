@@ -40,7 +40,15 @@ int player::call_contract(int contracts[7]){
     cout << "suit 3: " << count_suit(cards, 3) << endl;
     cout << "suit 4: " << count_suit(cards, 4) << endl;
 
-    cout << " round est: " << take_rounds(cards) << endl;
+
+    est_hearts(cards);
+
+    sort(cards.begin(), cards.end());
+    hand_output();
+
+    cout << " hearts est: " << est_hearts(cards) << endl;
+
+
 
 }
 
