@@ -43,13 +43,12 @@ int player::call_contract(int contracts[7]){
 
     est_king(cards);
 
+    takepoints = est_girls(cards);
+
 
     sort(cards.begin(), cards.end());
     hand_output(cards);
-
-    cout << "lowest of S: " << lowest_of_suit(cards, 1) << "  lowest of H: " << lowest_of_suit(cards, 2) << endl;
-
-    cout << " king est: " << est_king(cards) << endl;
+    cout << " takepoints: " << takepoints << endl;
 
 
 

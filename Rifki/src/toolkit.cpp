@@ -284,8 +284,8 @@ int est_king(vector<int> cards){
         else if(i < 7){ct -= 5;}
 
         // check for ace of hearts and other hearts
-        if(count_suit(cards, 2) < 2 && has_card(cards, 214)){ct += 200}
-        if(count_suit(cards, 2) < 3 && has_card(cards, 214)){ct += 150}
+        if(count_suit(cards, 2) < 2 && has_card(cards, 214)){ct += 200;}
+        if(count_suit(cards, 2) < 3 && has_card(cards, 214)){ct += 150;}
 
     }
 
@@ -351,4 +351,63 @@ int est_hearts(vector<int> cards){
 
     return ct*30;
 }
+
+/// estimates the points the hand would receive from no girls contract
+int est_girls(vector<int> cards){
+    int ct = 0;
+    int suit_count;
+
+    for(int suit = 1; suit < 5; suit++){
+        if(has_card(cards, suit*100+14)){
+            suit_count = count_suit(cards, suit);
+            if(has_card(cards, suit*100+12)){
+                if(suit_count == 1){ct += 35;}
+                if(suit_count == 2){ct += 30;}
+                if(suit_count == 3){ct += 15;}
+                if(suit_count == 4){ct += 4;}
+
+            } else {
+                if(suit_count == 1){ct += 42;}
+                if(suit_count == 2){ct += 38;}
+                if(suit_count == 3){ct += 30;}
+                if(suit_count == 4){ct += 10;}
+            }
+        } else
+        if(has_card(cards, suit*100+13)){
+            suit_count = count_suit(cards, suit);
+            if(has_card(cards, suit*100+12)){
+                if(suit_count == 1){ct += 35;}
+                if(suit_count == 2){ct += 30;}
+                if(suit_count == 3){ct += 15;}
+                if(suit_count == 4){ct += 4;}
+
+            } else {
+                if(suit_count == 1){ct += 42;}
+                if(suit_count == 2){ct += 38;}
+                if(suit_count == 3){ct += 30;}
+                if(suit_count == 4){ct += 10;}
+            }
+        }
+    }
+
+    return ct;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -21,5 +21,6 @@ int highest_of_suit(vector<int> cards, int suit_id);
 bool has_card(vector<int> cards, int card_id);
 int est_king(vector<int> cards);
 int est_hearts(vector<int> cards);
+int est_girls(vector<int> cards);
 
 #endif // TOOLKIT_H
