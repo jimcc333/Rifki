@@ -35,10 +35,8 @@ void player::show_hand (){
 
 int player::call_contract(int contracts[7]){
     int takepoints = takepoint_eval(cards);
-    cout << "suit 1: " << count_suit(cards, 1) << endl;
-    cout << "suit 2: " << count_suit(cards, 2) << endl;
-    cout << "suit 3: " << count_suit(cards, 3) << endl;
-    cout << "suit 4: " << count_suit(cards, 4) << endl;
+
+
 
 
     est_hearts(cards);
@@ -48,6 +46,8 @@ int player::call_contract(int contracts[7]){
 
     sort(cards.begin(), cards.end());
     hand_output(cards);
+
+    cout << "lowest of S: " << lowest_of_suit(cards, 1) << "  lowest of H: " << lowest_of_suit(cards, 2) << endl;
 
     cout << " king est: " << est_king(cards) << endl;
 

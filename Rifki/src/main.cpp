@@ -57,7 +57,7 @@ bool new_game(){
         pass.clear();
 
         //start calling shit
-        player0.show_hand();
+        //player0.show_hand();
         player0.call_contract(points.contracts[player0.id]);
 
 

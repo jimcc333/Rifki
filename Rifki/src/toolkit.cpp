@@ -190,7 +190,7 @@ int count_suit(vector<int> cards, int suit_id){
     return ct;
 }
 
-/// returns a vector of the cards of the given suit
+/// updates the scards vector with the cards of the given suit
 void return_suit(vector<int> cards, int suit_id, vector<int> &scards){
     scards.clear();
     for(vector<int>::iterator it = cards.begin(); it != cards.end(); ++it){
@@ -200,20 +200,58 @@ void return_suit(vector<int> cards, int suit_id, vector<int> &scards){
     }
 }
 
+/// returns the number of the lowest numbered card in a suit, -1 if empty suit
+int lowest_of_suit(vector<int> cards, int suit_id){
+    int lowest = 99;
+    bool assigned = false;
+    for(vector<int>::iterator it = cards.begin(); it != cards.end(); ++it){
+        if(*it/100 == suit_id && lowest > *it%100){
+            lowest = *it%100;
+            assigned = true;
+        }
+    }
+    if(assigned){
+        return lowest;
+    } else {
+        return -1;
+    }
+}
+
+/// return the number of the highest numbered card in a suit, -1 if empty suit
+int highest_of_suit(vector<int> cards, int suit_id){
+    int highest = 99;
+    bool assigned = false;
+    for(vector<int>::iterator it = cards.begin(); it != cards.end(); ++it){
+        if(*it/100 == suit_id && highest < *it%100){
+            highest = *it%100;
+            assigned = true;
+        }
+    }
+    if(assigned){
+        return highest;
+    } else {
+        return -1;
+    }
+}
+
+/// return true if card is present, false otherwise
+bool has_card(vector<int> cards, int card_id){
+   for(vector<int>::iterator it = cards.begin(); it != cards.end(); ++it){
+        if(*it == card_id){
+            return true;
+        }
+    }
+    return false;
+}
 
 /// estimates the points the hand would receive from king contract
 int est_king(vector<int> cards){
-    int ct = 320/4; //default is base rate
-    bool have_king = false;
+    int ct = 70; //default is base rate
 
     sort(cards.begin(), cards.end());
 
-    //check to see if king is held
-    for(vector<int>::iterator it = cards.begin(); it != cards.end(); ++it){
-        if(*it == 214){have_king = true;}
-    }
 
-    if(have_king){
+    if(has_card(cards, 213)){
         if(count_suit(cards, 1) == 0 || count_suit(cards, 3) == 0 || count_suit(cards, 4) == 0){
             // holding the king and have an empty suit in hand
             ct = 0;
@@ -229,6 +267,25 @@ int est_king(vector<int> cards){
     } else {
         // dont have the king
 
+        // check for lowest cards in suits
+        int i = lowest_of_suit(cards, 1);
+        if(i < 5){ct -= 20;}
+        else if(i < 6){ct -= 15;}
+        else if(i < 7){ct -= 5;}
+
+        i = lowest_of_suit(cards, 3);
+        if(i < 5){ct -= 20;}
+        else if(i < 6){ct -= 15;}
+        else if(i < 7){ct -= 5;}
+
+        i = lowest_of_suit(cards, 4);
+        if(i < 5){ct -= 20;}
+        else if(i < 6){ct -= 15;}
+        else if(i < 7){ct -= 5;}
+
+        // check for ace of hearts and other hearts
+        if(count_suit(cards, 2) < 2 && has_card(cards, 214)){ct += 200}
+        if(count_suit(cards, 2) < 3 && has_card(cards, 214)){ct += 150}
 
     }
 
@@ -275,22 +332,22 @@ int est_hearts(vector<int> cards){
 
     // check if there is chance to get rid of an unwanted high heart
     return_suit(cards, 1, scards);
-    if(scards.size() == 3 && ct >= 4){ct -= 1}
-    if(scards.size() == 2 && ct >= 4){ct -= 2}
-    if(scards.size() == 1 && ct >= 4){ct -= 3}
-    if(scards.size() == 0 && ct >= 4){ct -= 4}
+    if(scards.size() == 3 && ct >= 4){ct -= 1;}
+    if(scards.size() == 2 && ct >= 4){ct -= 2;}
+    if(scards.size() == 1 && ct >= 4){ct -= 3;}
+    if(scards.size() == 0 && ct >= 4){ct -= 4;}
 
     return_suit(cards, 3, scards);
-    if(scards.size() == 3 && ct >= 4){ct -= 1}
-    if(scards.size() == 2 && ct >= 4){ct -= 2}
-    if(scards.size() == 1 && ct >= 4){ct -= 3}
-    if(scards.size() == 0 && ct >= 4){ct -= 4}
+    if(scards.size() == 3 && ct >= 4){ct -= 1;}
+    if(scards.size() == 2 && ct >= 4){ct -= 2;}
+    if(scards.size() == 1 && ct >= 4){ct -= 3;}
+    if(scards.size() == 0 && ct >= 4){ct -= 4;}
 
     return_suit(cards, 4, scards);
-    if(scards.size() == 3 && ct >= 4){ct -= 1}
-    if(scards.size() == 2 && ct >= 4){ct -= 2}
-    if(scards.size() == 1 && ct >= 4){ct -= 3}
-    if(scards.size() == 0 && ct >= 4){ct -= 4}
+    if(scards.size() == 3 && ct >= 4){ct -= 1;}
+    if(scards.size() == 2 && ct >= 4){ct -= 2;}
+    if(scards.size() == 1 && ct >= 4){ct -= 3;}
+    if(scards.size() == 0 && ct >= 4){ct -= 4;  }
 
     return ct*30;
 }
