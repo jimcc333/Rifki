@@ -43,7 +43,7 @@ int player::call_contract(int contracts[7]){
 
     est_king(cards);
 
-    takepoints = est_girls(cards);
+    takepoints = est_boys(cards);
 
 
     sort(cards.begin(), cards.end());

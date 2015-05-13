@@ -414,10 +414,74 @@ int est_girls(vector<int> cards){
     return ct;
 }
 
+/// estimates the points the hand would receive from no b contract
+int est_boys(vector<int> cards){
+    int ct = 0;
+    int suit_count;
+    int inc = 60; // min: 40.  inc is like one negative point card
+
+    for(int suit = 1; suit < 5; suit++){
+        suit_count = count_suit(cards, suit);
+
+        if(lowest_of_suit(cards, suit) == 5 && suit_count == 2){ct += inc*0.10;}
+        if(lowest_of_suit(cards, suit) == 5 && suit_count == 3){ct += inc*0.30;}
+        if(lowest_of_suit(cards, suit) == 5 && suit_count == 4){ct += inc*0.10;}
+
+        if(lowest_of_suit(cards, suit) == 6 && suit_count == 2){ct += inc*0.15;}
+        if(lowest_of_suit(cards, suit) == 6 && suit_count == 3){ct += inc*0.35;}
+        if(lowest_of_suit(cards, suit) == 6 && suit_count == 4){ct += inc*0.15;}
+
+        if(lowest_of_suit(cards, suit) == 7 && suit_count == 2){ct += inc*0.20;}
+        if(lowest_of_suit(cards, suit) == 7 && suit_count == 3){ct += inc*0.50;}
+        if(lowest_of_suit(cards, suit) == 7 && suit_count == 4){ct += inc*0.20;}
+
+        if(lowest_of_suit(cards, suit) > 8 && suit_count == 2){ct += inc*0.40;}
+        if(lowest_of_suit(cards, suit) > 8 && suit_count == 3){ct += inc*0.70;}
+        if(lowest_of_suit(cards, suit) > 8 && suit_count == 4){ct += inc*0.40;}
 
 
+        if(highest_of_suit(cards, suit) == 14 && suit_count == 1){ct += inc*1.5;}
+        if(highest_of_suit(cards, suit) == 14 && suit_count == 2){ct += inc*1.0;}
+        if(highest_of_suit(cards, suit) == 14 && suit_count == 3){ct += inc*0.80;}
+        if(highest_of_suit(cards, suit) == 14 && suit_count == 4){ct += inc*0.50;}
+        if(highest_of_suit(cards, suit) == 14 && suit_count == 5){ct += inc*0.20;}
+        if(highest_of_suit(cards, suit) == 14 && suit_count > 5){ct += inc*0.05;}
+
+        inc -= 10
+        if(highest_of_suit(cards, suit) == 13 && suit_count == 1){ct += inc*1.5;}
+        if(highest_of_suit(cards, suit) == 13 && suit_count == 2){ct += inc*1.0;}
+        if(highest_of_suit(cards, suit) == 13 && suit_count == 3){ct += inc*0.80;}
+        if(highest_of_suit(cards, suit) == 13 && suit_count == 4){ct += inc*0.50;}
+        if(highest_of_suit(cards, suit) == 13 && suit_count == 5){ct += inc*0.20;}
+        if(highest_of_suit(cards, suit) == 13 && suit_count > 5){ct += inc*0.05;}
+
+        inc -= 10
+        if(highest_of_suit(cards, suit) == 12 && suit_count == 1){ct += inc*1.5;}
+        if(highest_of_suit(cards, suit) == 12 && suit_count == 2){ct += inc*1.0;}
+        if(highest_of_suit(cards, suit) == 12 && suit_count == 3){ct += inc*0.80;}
+        if(highest_of_suit(cards, suit) == 12 && suit_count == 4){ct += inc*0.50;}
+        if(highest_of_suit(cards, suit) == 12 && suit_count == 5){ct += inc*0.20;}
+        if(highest_of_suit(cards, suit) == 12 && suit_count > 5){ct += inc*0.05;}
+
+        inc -= 10
+        if(highest_of_suit(cards, suit) == 11 && suit_count == 1){ct += inc*1.5;}
+        if(highest_of_suit(cards, suit) == 11 && suit_count == 2){ct += inc*1.0;}
+        if(highest_of_suit(cards, suit) == 11 && suit_count == 3){ct += inc*0.80;}
+        if(highest_of_suit(cards, suit) == 11 && suit_count == 4){ct += inc*0.50;}
+        if(highest_of_suit(cards, suit) == 11 && suit_count == 5){ct += inc*0.20;}
+        if(highest_of_suit(cards, suit) == 11 && suit_count > 5){ct += inc*0.05;}
+
+        inc += 30
+        if(highest_of_suit(cards, suit) < 11 && suit_count == 1){ct -= inc*0.50;}
+        if(highest_of_suit(cards, suit) < 11 && suit_count == 2){ct -= inc*0.40;}
+        if(highest_of_suit(cards, suit) < 11 && suit_count == 3){ct -= inc*0.30;}
+        if(highest_of_suit(cards, suit) < 11 && suit_count == 4){ct -= inc*0.20;}
+        if(highest_of_suit(cards, suit) < 11 && suit_count == 5){ct -= inc*0.10;}
+        if(highest_of_suit(cards, suit) < 11 && suit_count > 5){ct -= inc*0.05;}
 
 
+    return ct;
+}
 
 
 
