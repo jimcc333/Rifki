@@ -60,7 +60,7 @@ bool new_game(){
         //player0.show_hand();
         player0.call_contract(points.contracts[player0.id]);
 
-
+        cout << " sum: " << est_girls(player0.cards) + est_girls(player1.cards) + est_girls(player2.cards) + est_girls(player3.cards) << endl;
 
         //clear the cards
         player0.empty_hand();

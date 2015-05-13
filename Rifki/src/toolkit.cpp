@@ -356,38 +356,59 @@ int est_hearts(vector<int> cards){
 int est_girls(vector<int> cards){
     int ct = 0;
     int suit_count;
+    int inc = 120;
 
     for(int suit = 1; suit < 5; suit++){
+        suit_count = count_suit(cards, suit);
         if(has_card(cards, suit*100+14)){
-            suit_count = count_suit(cards, suit);
             if(has_card(cards, suit*100+12)){
-                if(suit_count == 1){ct += 35;}
-                if(suit_count == 2){ct += 30;}
-                if(suit_count == 3){ct += 15;}
-                if(suit_count == 4){ct += 4;}
+                if(suit_count == 1){ct += inc*0.60;}
+                if(suit_count == 2){ct += inc*0.20;}
+                if(suit_count == 3){ct += inc*0.15;}
+                if(suit_count == 4){ct += inc*0.04;}
 
             } else {
-                if(suit_count == 1){ct += 42;}
-                if(suit_count == 2){ct += 38;}
-                if(suit_count == 3){ct += 30;}
-                if(suit_count == 4){ct += 10;}
+                if(suit_count == 1){ct += inc*0.80;}
+                if(suit_count == 2){ct += inc*0.60;}
+                if(suit_count == 3){ct += inc*0.30;}
+                if(suit_count == 4){ct += inc*0.10;}
             }
-        } else
-        if(has_card(cards, suit*100+13)){
-            suit_count = count_suit(cards, suit);
+        } else if(has_card(cards, suit*100+13)){
             if(has_card(cards, suit*100+12)){
-                if(suit_count == 1){ct += 35;}
-                if(suit_count == 2){ct += 30;}
-                if(suit_count == 3){ct += 15;}
-                if(suit_count == 4){ct += 4;}
+                if(suit_count == 1){ct += inc*0.60;}
+                if(suit_count == 2){ct += inc*0.20;}
+                if(suit_count == 3){ct += inc*0.15;}
+                if(suit_count == 4){ct += inc*0.4;}
 
             } else {
-                if(suit_count == 1){ct += 42;}
-                if(suit_count == 2){ct += 38;}
-                if(suit_count == 3){ct += 30;}
-                if(suit_count == 4){ct += 10;}
+                if(suit_count == 1){ct += inc*0.80;}
+                if(suit_count == 2){ct += inc*0.60;}
+                if(suit_count == 3){ct += inc*0.30;}
+                if(suit_count == 4){ct += inc*0.10;}
             }
         }
+        if(has_card(cards, suit*100+14) && has_card(cards, suit*100+13)){
+            if(suit_count == 2){ct += inc*0.100;}
+            if(suit_count == 3){ct += inc*0.70;}
+            if(suit_count == 4){ct += inc*0.50;}
+            if(suit_count == 5){ct += inc*0.20;}
+        }
+
+        if(lowest_of_suit(cards, suit) == 5 && suit_count == 2){ct += inc*0.10;}
+        if(lowest_of_suit(cards, suit) == 5 && suit_count == 3){ct += inc*0.30;}
+        if(lowest_of_suit(cards, suit) == 5 && suit_count == 4){ct += inc*0.10;}
+
+        if(lowest_of_suit(cards, suit) == 6 && suit_count == 2){ct += inc*0.15;}
+        if(lowest_of_suit(cards, suit) == 6 && suit_count == 3){ct += inc*0.35;}
+        if(lowest_of_suit(cards, suit) == 6 && suit_count == 4){ct += inc*0.15;}
+
+        if(lowest_of_suit(cards, suit) == 7 && suit_count == 2){ct += inc*0.20;}
+        if(lowest_of_suit(cards, suit) == 7 && suit_count == 3){ct += inc*0.50;}
+        if(lowest_of_suit(cards, suit) == 7 && suit_count == 4){ct += inc*0.20;}
+
+        if(lowest_of_suit(cards, suit) > 8 && suit_count == 2){ct += inc*0.40;}
+        if(lowest_of_suit(cards, suit) > 8 && suit_count == 3){ct += inc*0.70;}
+        if(lowest_of_suit(cards, suit) > 8 && suit_count == 4){ct += inc*0.40;}
     }
 
     return ct;

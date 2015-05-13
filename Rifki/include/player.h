@@ -25,10 +25,11 @@ class player {
         void empty_hand(){cards.clear();}
         int call_contract(int contracts[7]);
 
+        vector<int> cards;
 
     protected:
     private:
-        vector<int> cards;
+
 };
 
 #endif // CARD_H
